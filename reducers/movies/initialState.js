@@ -1,5 +1,6 @@
 const InitialState = {
-  list: []
+  list: [],
+  selectedMovie: {},
 }
 
 export default InitialState;

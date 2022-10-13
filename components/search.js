@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, StatusBar, FlatList, TouchableOpacity, useWindowDimensions, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Styles from './styles';
-import { setMovieList } from '../reducers/movies/actions';
+import { selectMovie } from '../reducers/movies/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import MovieItem from './movie-item';
 import { FontAwesome } from '@expo/vector-icons';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   headerText: {
-    fontSize: 26,
+    fontSize: 24,
     color: 'white',
     fontWeight: 'bold',
   },
@@ -44,6 +44,11 @@ const Home = () => {
     }
   }, [search]);
 
+  const selectItem = (movie) => {
+    dispatch(selectMovie(movie));
+    //ADD NAVIGATE TO VIEW MOVIE HERE
+  }
+
   return (
     <View style={Styles.background}>
       <StatusBar barStyle={'light-content'} />
@@ -53,7 +58,9 @@ const Home = () => {
             <FontAwesome name={'angle-left'} size={40} color={'white'} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.headerText}>Finder</Text>
+        <View style={{ flex: 1, alignItems: 'center' }}>
+          <Text style={styles.headerText}>Finder</Text>
+        </View>
       </View>
       <View style={[Styles.header, { paddingTop: 15, justifyContent: 'flex-start' }]}>
         <FontAwesome name={'search'} size={22} color={'white'} />
@@ -69,7 +76,7 @@ const Home = () => {
       <FlatList
         numColumns={2}
         data={result}
-        renderItem={({ item }) => <MovieItem item={item} />}
+        renderItem={({ item }) => <MovieItem item={item} onPress={() => selectItem(item)} />}
         ListHeaderComponent={() => <View style={{ height: 15 }} />}
       />
     </View>

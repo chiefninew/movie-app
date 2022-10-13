@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, StatusBar, FlatList, TouchableOpacity, Interact
 import React, { useEffect, useState } from 'react'
 import Styles from './styles';
 import movies from '../film.json';
-import { setMovieList } from '../reducers/movies/actions';
+import { setMovieList, selectMovie } from '../reducers/movies/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import MovieItem from './movie-item';
 import { FontAwesome } from '@expo/vector-icons';
@@ -29,6 +29,11 @@ const Home = () => {
     })
   }, []);
 
+  const selectItem = (movie) => {
+    dispatch(selectMovie(movie));
+    //ADD NAVIGATE TO VIEW MOVIE HERE
+  }
+
   return (
     <View style={Styles.background}>
       <StatusBar barStyle={'light-content'} />
@@ -43,7 +48,7 @@ const Home = () => {
           <FlatList
             numColumns={2}
             data={movieList}
-            renderItem={({ item }) => <MovieItem item={item} />}
+            renderItem={({ item }) => <MovieItem item={item} onPress={() => selectItem(item)} />}
             ListHeaderComponent={() => <View style={{ height: 15 }} />}
           />
         )
