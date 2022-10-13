@@ -53,9 +53,7 @@ const Home = () => {
             <FontAwesome name={'angle-left'} size={40} color={'white'} />
           </TouchableOpacity>
         </View>
-        <View style={{ position: 'absolute', width: width, alignItems: 'center', top: 75 }}>
-          <Text style={styles.headerText}>Finder</Text>
-        </View>
+        <Text style={styles.headerText}>Finder</Text>
       </View>
       <View style={[Styles.header, { paddingTop: 15, justifyContent: 'flex-start' }]}>
         <FontAwesome name={'search'} size={22} color={'white'} />
